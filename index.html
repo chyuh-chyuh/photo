@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YH Ch — Photography Portfolio</title>
+  <style>
+    /* Reset & Base Setup */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      transition: none !important;
+      animation: none !important;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #F8F8F6;
+      color: #2F2F2E;
+      line-height: 1.6;
+      letter-spacing: -0.01em;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Navigation */
+    header {
+      padding: 36px 0 20px 0;
+      border-bottom: 1px solid #ECECE8;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      font-size: 1.05rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #1F1F1E;
+      text-decoration: none;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 24px;
+    }
+
+    nav a {
+      color: #70706A;
+      text-decoration: none;
+      font-size: 0.88rem;
+    }
+
+    nav a:hover {
+      color: #1F1F1E;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    /* Profile Hero Section */
+    .profile-hero {
+      padding: 48px 0 44px 0;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      border-bottom: 1px solid #ECECE8;
+    }
+
+    @media (max-width: 600px) {
+      .profile-hero {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+      }
+    }
+
+    .profile-avatar {
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      flex-shrink: 0;
+      border: 1px solid #E0E0DA;
+      background-color: #ECECE6;
+    }
+
+    .profile-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .profile-name {
+      font-size: 1.35rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: #1F1F1E;
+    }
+
+    .profile-tagline {
+      font-size: 0.88rem;
+      color: #7E7E77;
+      margin-top: 2px;
+      margin-bottom: 8px;
+    }
+
+    .profile-bio {
+      font-size: 0.92rem;
+      color: #4F4F49;
+      max-width: 620px;
+      line-height: 1.55;
+    }
+
+    /* Portfolio Section */
+    .portfolio-section {
+      padding: 48px 0 64px 0;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 32px;
+    }
+
+    .section-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #888882;
+      font-weight: 600;
+    }
+
+    .section-subtitle {
+      font-size: 0.8rem;
+      color: #9C9C94;
+    }
+
+    /* Portfolio Grid */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 48px 32px;
+    }
+
+    @media (max-width: 720px) {
+      .portfolio-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    .portfolio-card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Make the 5th item take full width if odd count, for balanced composition */
+    .portfolio-card.featured-card {
+      grid-column: 1 / -1;
+    }
+
+    .card-media {
+      width: 100%;
+      background-color: #EFEFEA;
+      overflow: hidden;
+      border: 1px solid #ECECE8;
+      line-height: 0;
+    }
+
+    .card-media img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    .card-caption {
+      margin-top: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 0.86rem;
+      color: #2F2F2E;
+    }
+
+    .card-meta {
+      font-size: 0.78rem;
+      color: #8A8A83;
+      margin-top: 2px;
+    }
+
+    /* About Section */
+    .about-section {
+      padding: 48px 0 64px 0;
+      border-top: 1px solid #ECECE8;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 36px;
+    }
+
+    @media (max-width: 680px) {
+      .about-section {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+    }
+
+    .about-body {
+      font-size: 0.92rem;
+      color: #4A4A45;
+      max-width: 600px;
+    }
+
+    .about-body p + p {
+      margin-top: 14px;
+    }
+
+    .gear-list {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid #ECECE8;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px 24px;
+      font-size: 0.82rem;
+    }
+
+    .gear-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .gear-item .label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #96968E;
+      margin-bottom: 2px;
+    }
+
+    .gear-item .value {
+      color: #2F2F2E;
+      font-weight: 500;
+    }
+
+    /* Footer */
+    footer {
+      padding: 28px 0 44px 0;
+      border-top: 1px solid #ECECE8;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      color: #9E9E96;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <a href="#" class="brand">YH Ch</a>
+      <nav>
+        <ul>
+          <li><a href="#portfolio">Works</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Profile Hero with Round Profile Photo -->
+    <section class="profile-hero">
+      <img src="assets/avatar.jpg" alt="Profile photo of YH Ch" class="profile-avatar">
+      <div class="profile-info">
+        <h1 class="profile-name">YH Ch</h1>
+        <div class="profile-tagline">amateur photographer &middot; Taiwan</div>
+        <p class="profile-bio">
+          Documenting daily light, quiet alleys, and understated foliage. Focusing on natural stillness, muted tones, and unhurried observation.
+        </p>
+      </div>
+    </section>
+
+    <!-- Portfolio Gallery (Arranged Chromatically by Color Palette) -->
+    <section class="portfolio-section" id="portfolio">
+      <div class="section-header">
+        <span class="section-title">Selected Photographs</span>
+      </div>
+
+      <div class="portfolio-grid">
+        <!-- 01. Deep Shadows & Delicate Pink -->
+        <article class="portfolio-card">
+          <div class="card-media">
+            <img src="assets/photo-blossom.jpg" alt="Pink cherry blossom branch in sunlight against deep dark backdrop">
+          </div>
+          <div class="card-caption">
+            <span>Cherry Blossom</span>
+          </div>
+          <div class="card-meta">Flora &middot; High Contrast Darkness</div>
+        </article>
+
+        <!-- 02. Warm Amber Sunlight & Charcoal -->
+        <article class="portfolio-card">
+          <div class="card-media">
+            <img src="assets/photo-counter.jpg" alt="Raking sunlight on translucent cups and kitchen counter">
+          </div>
+          <div class="card-caption">
+            <span>Countertop Still</span>
+          </div>
+          <div class="card-meta">Object &middot; High Contrast Shadow</div>
+        </article>
+
+        <!-- 03. Golden Light & Sunlit Foliage (Original Profile Photo) -->
+        <article class="portfolio-card">
+          <div class="card-media">
+            <img src="assets/photo-leaves.jpg" alt="Delicate green sprout bathed in warm golden morning bokeh">
+          </div>
+          <div class="card-caption">
+            <span>Morning Leaves</span>
+          </div>
+          <div class="card-meta">Botany &middot; Warm Bokeh</div>
+        </article>
+
+        <!-- 04. Sunlit Field Greens -->
+        <article class="portfolio-card">
+          <div class="card-media">
+            <img src="assets/photo-grass.jpg" alt="Sunlit green grass field with a discarded clear plastic water bottle">
+          </div>
+          <div class="card-caption">
+            <span>Lawn & Ephemera</span>
+          </div>
+          <div class="card-meta">Field &middot; Afternoon Sunlight</div>
+        </article>
+
+        <!-- 05. Soft Sage & Misty Green -->
+        <article class="portfolio-card">
+          <div class="card-media">
+            <img src="assets/photo-glass.jpg" alt="Misty silhouettes of palm foliage through frosted glass">
+          </div>
+          <div class="card-caption">
+            <span>Through Glass</span>
+          </div>
+          <div class="card-meta">Diffused Light &middot; Silhouette</div>
+        </article>
+
+        <!-- 06. Weathered Turquoise & Incense -->
+        <article class="portfolio-card">
+          <div class="card-media">
+            <img src="assets/photo-incense.jpg" alt="Weathered blue-green stone altar with porcelain dish and red incense stick">
+          </div>
+          <div class="card-caption">
+            <span>Stone Altar</span>
+          </div>
+          <div class="card-meta">Incense &middot; Patina Texture</div>
+        </article>
+
+        <!-- 07. Framed Interior & Exterior Blue -->
+        <article class="portfolio-card">
+          <div class="card-media">
+            <img src="assets/photo-train.jpg" alt="View looking through a train passenger window out to factory buildings and sky">
+          </div>
+          <div class="card-caption">
+            <span>Train Window</span>
+          </div>
+          <div class="card-meta">Transit &middot; Framed Light</div>
+        </article>
+
+        <!-- 08. Coastal Daylight & Blue Warehouse -->
+        <article class="portfolio-card">
+          <div class="card-media">
+            <img src="assets/photo-village.jpg" alt="Sunlit village street with utility pole, doll mascot, and blue warehouse wall">
+          </div>
+          <div class="card-caption">
+            <span>Village Lane</span>
+          </div>
+          <div class="card-meta">Street &middot; Coastal Daylight</div>
+        </article>
+
+        <!-- 09. Mountain Slopes & Cyan Air -->
+        <article class="portfolio-card">
+          <div class="card-media">
+            <img src="assets/photo-mountain.jpg" alt="Weathered tree with creeping vine against a sunlit green mountain ridge">
+          </div>
+          <div class="card-caption">
+            <span>Mountain Ridge</span>
+          </div>
+          <div class="card-meta">Valley &middot; Weathered Wood &middot; Daylight</div>
+        </article>
+
+        <!-- 10. Open Winter Cerulean Sky -->
+        <article class="portfolio-card">
+          <div class="card-media">
+            <img src="assets/photo-branches.jpg" alt="Delicate bare branches reaching against an open blue sky">
+          </div>
+          <div class="card-caption">
+            <span>Branches & Sky</span>
+          </div>
+          <div class="card-meta">Winter Morning &middot; Open Sky</div>
+        </article>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+      <div class="section-title">About</div>
+      <div class="about-body">
+        <p>
+          I am an amateur photographer documenting fragments of everyday surroundings. I am drawn to muted colors, honest lighting, and quiet corners that usually pass unnoticed.
+        </p>
+        <p>
+          All images are personal snapshots taken during daily walks and travels, captured with natural ambient light.
+        </p>
+        <div class="gear-list">
+          <div class="gear-item">
+            <span class="label">Camera</span>
+            <span class="value">Nikon D50</span>
+          </div>
+          <div class="gear-item">
+            <span class="label">Lenses</span>
+            <span class="value">Nikkor 18-55mm f/3.5-5.6G<br>Nikkor 55-300mm f/4.5-5.6G</span>
+          </div>
+          <div class="gear-item">
+            <span class="label">Location</span>
+            <span class="value">Taiwan</span>
+          </div>
+          <div class="gear-item">
+            <span class="label">Themes</span>
+            <span class="value">Botany &middot; City &middot; Light &amp; Shadow</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <span>&copy; 2026 YH Ch</span>
+      <span>Local preview &middot; Not published</span>
+    </footer>
+  </div>
+
+</body>
+</html>
